@@ -21,8 +21,11 @@ class UsersDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function ($row) {
-                $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+            ->addColumn('role', function (User $user) {
+                return $user->role->name;
+            })
+            ->addColumn('action', function (User $user) {
+                $actionBtn = '<a href="' . route('user.edit', ['user' => $user->id]) . '" class="edit btn btn-success btn-sm">Edit</a> <form method="post" action="' . route('user.destroy', $user->id) . '">' . method_field('delete') . '<br>' . csrf_field() . '<button type="submit" class="delete btn btn-danger btn-sm">Delete</button></form>';
                 return $actionBtn;
             });
     }
@@ -50,7 +53,7 @@ class UsersDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
-            ->orderBy(1)
+            ->orderBy(0, 'asc')
             ->buttons(
                 Button::make('create'),
                 Button::make('export'),
@@ -71,8 +74,7 @@ class UsersDataTable extends DataTable
             Column::make('id'),
             Column::make('name'),
             Column::make('email'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('role'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

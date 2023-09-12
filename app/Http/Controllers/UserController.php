@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\UsersDataTable;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -35,7 +36,8 @@ class UserController extends Controller
         $data = [
             'title'    => 'Manajemen Pengguna',
             'subTitle' => 'Tambah Pengguna',
-            'route'    => 'user.index'
+            'route'    => 'user.index',
+            'roles'    => Role::all(),
         ];
 
         return view('pages.admin.createPengguna', $data);
@@ -49,7 +51,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'      => 'required',
+            'email'     => 'required|unique:users',
+            'password'  => 'required|min:4',
+            'roles_id'  => 'required',
+        ]);
+
+        if ($request->password_confirmation != $validatedData['password']) {
+            return back()->withErrors([
+                'password_confirmation' => ['Konfirmasi password tidak sesuai!']
+            ]);
+        }
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        User::create($validatedData);
+
+        return redirect()->route('user.index')->with('success', 'Data Pengguna Baru Berhasil Dibuat!');
     }
 
     /**
@@ -71,7 +90,15 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $data = [
+            'title'    => 'Manajemen Pengguna',
+            'subTitle' => 'Edit Pengguna',
+            'route'    => 'user.index',
+            'roles'    => Role::all(),
+            'user'     => $user
+        ];
+
+        return view('pages.admin.editPengguna', $data);
     }
 
     /**
@@ -83,7 +110,33 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $dataToValidate = [
+            'name'      => 'required',
+            'roles_id'  => 'required',
+        ];
+
+        if ($request->email != $user->email)
+            $dataToValidate['email'] = 'required|unique:users';
+
+        if ($request->password != null)
+            $dataToValidate['password'] = 'required|min:4';
+
+        $validatedData = $request->validate($dataToValidate);
+
+        if ($request->password != null) {
+            if ($request->password_confirmation != $validatedData['password']) {
+                return back()->withErrors([
+                    'password_confirmation' => ['Konfirmasi password tidak sesuai!']
+                ]);
+            }
+
+            $validatedData['password'] = Hash::make($validatedData['password']);
+        }
+
+        User::where('id', $user->id)
+            ->update($validatedData);
+
+        return redirect()->route('user.index')->with('success', 'Data Pengguna Baru Berhasil Diedit!');
     }
 
     /**
@@ -94,6 +147,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+        return redirect()->route('user.index')->with('success', 'Data Pengguna Baru Berhasil Dihapus!');
     }
 }

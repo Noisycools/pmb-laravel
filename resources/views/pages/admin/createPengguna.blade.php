@@ -12,20 +12,33 @@
                         <h3 class="mb-0">{{ __('Buat Data Pengguna Baru') }}</h3>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form method="POST" action="{{ route('user.store') }}" id="formCreatePengguna">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="name">Nama</label>
-                                        <input type="text" name="name" class="form-control" id="name"
-                                            placeholder="Masukkan Nama">
+                                        <input type="text" name="name"
+                                            class="form-control @error('name') is-invalid @enderror" id="name"
+                                            placeholder="Masukkan Nama" required value="{{ old('name') }}">
+                                        @error('name')
+                                            <div class="invalid_feedback">
+                                                <span class="text-danger" style="font-size: small">{{ $message }}</span>
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="email">Email</label>
-                                        <input type="email" name="email" class="form-control" id="email"
-                                            placeholder="Masukkan Email">
+                                        <input type="email" name="email"
+                                            class="form-control @error('email') is-invalid @enderror" id="email"
+                                            placeholder="Masukkan Email" required value="{{ old('email') }}">
+                                        @error('email')
+                                            <div class="invalid_feedback">
+                                                <span class="text-danger" style="font-size: small">{{ $message }}</span>
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -33,30 +46,59 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="password">Password</label>
-                                        <input type="password" name="password" class="form-control" id="password"
+                                        <input type="password" name="password"
+                                            class="form-control @error('password') is-invalid @enderror" id="password"
                                             placeholder="Masukkan Password">
+                                        @error('password')
+                                            <div class="invalid_feedback">
+                                                <span class="text-danger" style="font-size: small">{{ $message }}</span>
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="konfirmasi-password">Konfirmasi
                                             Password</label>
-                                        <input type="password" class="form-control" id="konfirmasi-password"
-                                            placeholder="Ketik Ulang Password">
+                                        <input type="password" name="password_confirmation"
+                                            class="form-control @error('password') is-invalid @enderror @error('password_confirmation') is-invalid @enderror"
+                                            id="konfirmasi-password" placeholder="Ketik Ulang Password">
+                                        @error('password')
+                                            <div class="invalid_feedback">
+                                                <span class="text-danger" style="font-size: small">{{ $message }}</span>
+                                            </div>
+                                        @enderror
+                                        @error('password_confirmation')
+                                            <div class="invalid_feedback">
+                                                <span class="text-danger" style="font-size: small">{{ $message }}</span>
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group has-success">
-                                        <input type="text" placeholder="Success" class="form-control is-valid" />
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="roles_id">Role</label>
+                                        <select name="roles_id" id="roles_id"
+                                            class="form-control @error('roles_id') is-invalid @enderror">
+                                            @foreach ($roles as $r)
+                                                <option @if (old('roles_id') == $r->id) {{ 'selected' }} @endif
+                                                    value="{{ $r->id }}">{{ $r->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('roles_id')
+                                            <div class="invalid_feedback">
+                                                <span class="text-danger" style="font-size: small">{{ $message }}</span>
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group has-danger">
-                                        <input type="email" placeholder="Error Input" class="form-control is-invalid" />
-                                    </div>
-                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <a href="{{ route('user.index') }}" class="btn btn-primary">Kembali</a>
+                                <button type="submit" id="btn-create" class="btn btn-success">Buat Data</button>
                             </div>
                         </form>
                     </div>
@@ -64,4 +106,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('additionalJs')
+    <script src="{{ asset('assets') }}/js/admin/formPengguna.js"></script>
 @endsection
