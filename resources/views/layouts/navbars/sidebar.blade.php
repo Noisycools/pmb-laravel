@@ -91,7 +91,7 @@
                 </li>
                 @calon_mahasiswa
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">
+                        <a class="nav-link" href="{{ route('formPendaftaranMahasiswa') }}">
                             <i class="ni ni-laptop text-primary"></i> {{ __('Pendaftaran Online') }}
                         </a>
                     </li>
@@ -141,6 +141,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">
                         <i class="ni ni-notification-70 text-primary"></i> {{ __('Pengumuman Hasil') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('fakultasJurusan.index') }}">
+                        <i class="ni ni-books text-primary"></i> {{ __('Manajemen Fakultas Jurusan') }}
                     </a>
                 </li>
                 <li class="nav-item">

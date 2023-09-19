@@ -22,6 +22,10 @@ class CreateMahasiswaTable extends Migration
             $table->string('email')->unique();
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->date('tanggal_lahir');
+            $table->string('file_ijazah');
+            $table->string('file_kk');
+            $table->string('file_pasfoto');
+            $table->string('file_butawarna')->nullable();
             $table->unsignedBigInteger('program_studi_id');
             $table->timestamps();
         });

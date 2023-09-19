@@ -92,7 +92,7 @@
                         <small class="text-white">{{ __('Klik Tombol Di Bawah Untuk Mendaftar Sebagai User Baru') }}</small>
                         <br>
                         <br>
-                        <a href="{{ route('register') }}" class="btn btn-lg red">Daftar Akun Baru</a>
+                        <a href="{{ route('register.auth') }}" class="btn btn-lg red">Daftar Akun Baru</a>
                     </div>
                 </div>
             </div>

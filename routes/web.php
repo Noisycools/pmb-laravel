@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -49,4 +50,13 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.tables');
 	})->name('table');
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+
+	// Calon Mahasiswa
+	Route::resource('pendaftaran', 'App\Http\Controllers\PendaftaranController', ['except' => ['formPendaftaranMahasiswa']]);
+	Route::controller(PendaftaranController::class)->group(function () {
+		Route::get('formPendaftaranMahasiswa', 'formPendaftaranMahasiswa')->name('formPendaftaranMahasiswa');
+	});
+
+	// Staf Penerimaan
+	Route::resource('fakultasJurusan', 'App\Http\Controllers\FakultasJurusanController', ['except' => ['show']]);
 });
