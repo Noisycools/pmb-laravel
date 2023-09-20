@@ -214,11 +214,12 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-control-label" for="telepon">No. Telp</label>
-                                                    <input type="number" name="telepon"
-                                                        class="form-control @error('telepon') is-invalid @enderror"
-                                                        id="telepon" placeholder="Masukkan Nomor Telepon Aktif">
-                                                    @error('telepon')
+                                                    <label class="form-control-label" for="no_telp">No. Telp</label>
+                                                    <input type="text" name="no_telp"
+                                                        class="form-control @error('no_telp') is-invalid @enderror"
+                                                        id="no_telp" placeholder="Masukkan Nomor Telepon Aktif" required
+                                                        value="{{ old('no_telp', auth()->user()->no_telp) }}">
+                                                    @error('no_telp')
                                                         <div class="invalid_feedback">
                                                             <span class="text-danger"
                                                                 style="font-size: small">{{ $message }}</span>
@@ -364,10 +365,19 @@
                                         Step content
                                     </div>
                                     <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
-                                        <div class="d-flex justify-content-start mt-4">
-                                            <button type="submit" id="btn-create" class="btn btn-success">Submit
-                                                Data</button>
+                                        <div class="row my-4">
+                                            <div class="col-12">
+                                                <div class="custom-control custom-control-alternative custom-checkbox">
+                                                    <input class="custom-control-input" id="customCheckRegister" type="checkbox">
+                                                    <label class="custom-control-label" for="customCheckRegister">
+                                                        <span class="text-muted">{{ __('Saya setuju dengan ketentuan dan kebijakan yang tertera') }}</span>
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div class="d-flex justify-content-start mt-4">
+                                            <button type="submit" disabled id="btn-create" class="btn btn-success">Submit Data</button>
+                                        </div>                                
                                     </div>
                                 </div>
                             </form>
@@ -383,6 +393,18 @@
             </div>
         </div>
     @endsection
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#customCheckRegister").change(function () {
+            if ($(this).is(":checked")) {
+                $("#btn-create").prop("disabled", false);
+            } else {
+                $("#btn-create").prop("disabled", true);
+            }
+        });
+    });
+</script>
 
     @section('additionalJs')
         <script src="{{ asset('assets') }}/js/mahasiswa/pendaftaran.js"></script>
