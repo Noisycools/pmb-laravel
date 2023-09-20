@@ -49,6 +49,21 @@
                                     </span>
                                 @endif
                             </div>
+                            <div class="form-group{{ $errors->has('no_telp') ? ' has-danger' : '' }}">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
+                                    </div>
+                                    <input class="form-control{{ $errors->has('no_telp') ? ' is-invalid' : '' }}"
+                                        placeholder="{{ __('No Telpon') }}" type="text" name="no_telp"
+                                        value="{{ old('no_telp') }}" required>
+                                </div>
+                                @if ($errors->has('no_telp'))
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('no_telp') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                             <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">

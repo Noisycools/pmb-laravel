@@ -15,18 +15,18 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'no_telp' => ['required',],
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['no_telp' => $request->no_telp, 'password' => $request->password])) {
             $request->session()->regenerate();
 
             return redirect()->intended('home');
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'no_telp' => 'The provided credentials do not match our records.',
         ]);
     }
 
