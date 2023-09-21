@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\FakultasJurusan;
+use App\Models\ProgramStudi;
 
 class PendaftaranController extends Controller
 {
@@ -20,6 +22,8 @@ class PendaftaranController extends Controller
     {
         $data = [
             'title' => 'Form Pendaftaran Mahasiswa',
+            'fakultasJurusan' => FakultasJurusan::all(),
+            'programStudi' => ProgramStudi::all(),
         ];
 
         return view('pages.mahasiswa.pendaftaran', $data);
@@ -53,6 +57,8 @@ class PendaftaranController extends Controller
             'file_kk'           => 'required|file|max:2000|mimes:pdf',
             'file_pasfoto'      => 'required|image|file|max:1024|mimes:jpg',
             'file_butawarna'    => 'file|max:2000|mimes:pdf',
+            'fakultas_jurusan'  =>  'required',
+            'program_studi'     =>  'required',
         ];
 
         if ($request->email != auth()->user()->email)
