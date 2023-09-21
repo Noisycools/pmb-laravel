@@ -59,4 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// Staf Penerimaan
 	Route::resource('fakultasJurusan', 'App\Http\Controllers\FakultasJurusanController', ['except' => ['show']]);
+
+	// Program Studi
+	Route::resource('programStudi', 'App\Http\Controllers\ProgramStudiController', ['except' => ['show']]);
 });
