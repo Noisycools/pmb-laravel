@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\FakultasJurusan;
+use App\Models\ProgramStudi;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class FakultasJurusanDataTable extends DataTable
+class ProgramStudiDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,8 +21,11 @@ class FakultasJurusanDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function (FakultasJurusan $fakultasJurusan) {
-                $actionBtn = '<a href="' . route('fakultasJurusan.edit', ['fakultasJurusan' => $fakultasJurusan->id]) . '" class="edit btn btn-success btn-sm">Edit</a> <form method="post" action="' . route('fakultasJurusan.destroy', $fakultasJurusan->id) . '">' . method_field('delete') . '<br>' . csrf_field() . '<button type="submit" class="delete btn btn-danger btn-sm">Delete</button></form>';
+            ->addColumn('nama_fakultas_jurusan', function (ProgramStudi $programStudi) {
+                return $programStudi->fakultasJurusan->nama_fakultas_jurusan;
+            })
+            ->addColumn('action', function (ProgramStudi $programStudi) {
+                $actionBtn = '<a href="' . route('programStudi.edit', ['programStudi' => $programStudi->id]) . '" class="edit btn btn-success btn-sm">Edit</a> <form method="post" action="' . route('programStudi.destroy', $programStudi->id) . '">' . method_field('delete') . '<br>' . csrf_field() . '<button type="submit" class="delete btn btn-danger btn-sm">Delete</button></form>';
                 return $actionBtn;
             });
     }
@@ -30,10 +33,10 @@ class FakultasJurusanDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\FakultasJurusan $model
+     * @param \App\Models\ProgramStudi $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(FakultasJurusan $model)
+    public function query(ProgramStudi $model)
     {
         return $model->newQuery();
     }
@@ -46,7 +49,7 @@ class FakultasJurusanDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('fakultasjurusan-table')
+            ->setTableId('programstudi-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
@@ -69,8 +72,9 @@ class FakultasJurusanDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('nama_fakultas_jurusan'),
+            Column::make('nama_program_studi'),
             Column::make('deskripsi'),
+            Column::make('nama_fakultas_jurusan'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -86,6 +90,6 @@ class FakultasJurusanDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'FakultasJurusan_' . date('YmdHis');
+        return 'ProgramStudi_' . date('YmdHis');
     }
 }

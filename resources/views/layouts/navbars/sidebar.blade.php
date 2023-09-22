@@ -149,7 +149,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
+                    <a class="nav-link" href="{{ route('programStudi.index') }}">
                         <i class="ni ni-books text-primary"></i> {{ __('Manajemen Program Studi') }}
                     </a>
                 </li>

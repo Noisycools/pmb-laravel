@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ProgramStudiDataTable;
 use App\Models\ProgramStudi;
 use Illuminate\Http\Request;
+use App\Models\FakultasJurusan;
 
 class ProgramStudiController extends Controller
 {
@@ -12,9 +14,13 @@ class ProgramStudiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ProgramStudiDataTable $dataTable)
     {
-        //
+        $data = [
+            'title' => 'Manajemen Program Studi',
+        ];
+
+        return $dataTable->render('pages.stafPenerimaan.manajemenProgramStudi', $data);
     }
 
     /**
@@ -24,7 +30,14 @@ class ProgramStudiController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title'    => 'Manajemen Program studi',
+            'subTitle' => 'Tambah Program Studi',
+            'route'    => 'programStudi.index',
+            'fakultasJurusan'    => FakultasJurusan::all(),
+        ];
+
+        return view('pages.stafPenerimaan.createProgramStudi', $data);
     }
 
     /**
@@ -35,7 +48,14 @@ class ProgramStudiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_program_studi'      => 'required|unique:program_studi',
+            'fakultas_jurusan_id' => 'required',
+        ]);
+
+        ProgramStudi::create($validatedData);
+
+        return redirect()->route('programStudi.index')->with('success', 'Data Program Studi  Baru Berhasil Dibuat!');
     }
 
     /**
@@ -57,7 +77,15 @@ class ProgramStudiController extends Controller
      */
     public function edit(ProgramStudi $programStudi)
     {
-        //
+        $data = [
+            'title'    => 'Manajemen Fakultas Jurusan',
+            'subTitle' => 'Edit Fakultas Jurusan',
+            'route'    => 'programStudi.index',
+            'fakultasJurusan' => FakultasJurusan::all(),
+            'programStudi' => $programStudi,
+        ];
+
+        return view('pages.stafPenerimaan.editProgramStudi', $data);
     }
 
     /**
@@ -69,7 +97,13 @@ class ProgramStudiController extends Controller
      */
     public function update(Request $request, ProgramStudi $programStudi)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_program_studi' => 'required',
+            'fakultas_jurusan_id' => 'required',
+        ]);
+
+        ProgramStudi::where('id', $programStudi->id)->update($validatedData);
+        return redirect()->route('programStudi.index')->with('success', 'Data Program Studi Berhasil Diedit!');
     }
 
     /**
@@ -80,6 +114,7 @@ class ProgramStudiController extends Controller
      */
     public function destroy(ProgramStudi $programStudi)
     {
-        //
+        ProgramStudi::destroy($programStudi->id);
+        return redirect()->route('programStudi.index')->with('success', 'Data Program Studi Berhasil Dihapus!');
     }
 }
