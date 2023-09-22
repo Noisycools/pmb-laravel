@@ -75,5 +75,5 @@
 @endsection
 
 @section('additionalJs')
-    <script src="{{ asset('assets') }}/js/admin/formPengguna.js"></script>
+    <script src="{{ asset('assets') }}/js/stafPenerimaan/formProgramStudi.js"></script>
 @endsection
