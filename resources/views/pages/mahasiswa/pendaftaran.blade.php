@@ -363,45 +363,53 @@
                                         </div>
                                     </div>
                                     <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for="fakultas_jurusan">Fakultas Jurusan</label>
-                                                    <select name="fakultas_jurusan" id="fakultas_jurusan"
-                                                        class="form-control @error('fakultas_jurusan') is-invalid @enderror">
-                                                        <option hidden>Pilih Fakultas</option>
-                                                        @foreach ($fakultasJurusan as $item)
-                                                            <option @if (old('fakultas_jurusan') == $item->id) {{ 'selected' }} @endif
-                                                                value="{{ $item->id }}">{{ $item->nama_fakultas_jurusan }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    
-                                                    @error('fakultas_jurusan')
-                                                        <div class="invalid_feedback">
-                                                            <span class="text-danger" style="font-size: small">{{ $message }}</span>
-                                                        </div>
-                                                    @enderror
+                                        <div class="ml-4 mt-4">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="fakultas_jurusan">Fakultas
+                                                            Jurusan</label>
+                                                        <select name="fakultas_jurusan" id="fakultas_jurusan"
+                                                            class="form-control @error('fakultas_jurusan') is-invalid @enderror">
+                                                            <option hidden>Pilih Fakultas</option>
+                                                            @foreach ($fakultasJurusan as $item)
+                                                                <option
+                                                                    @if (old('fakultas_jurusan') == $item->id) {{ 'selected' }} @endif
+                                                                    value="{{ $item->id }}">
+                                                                    {{ $item->nama_fakultas_jurusan }}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        @error('fakultas_jurusan')
+                                                            <div class="invalid_feedback">
+                                                                <span class="text-danger"
+                                                                    style="font-size: small">{{ $message }}</span>
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="program_studi">Program
+                                                            Studi</label>
+                                                        <select name="program_studi" id="program_studi"
+                                                            class="form-control @error('program_studi') is-invalid @enderror">
+                                                            <option>Pilih Program Studi</option>
+                                                        </select>
+
+                                                        @error('program_studi')
+                                                            <div class="invalid_feedback">
+                                                                <span class="text-danger"
+                                                                    style="font-size: small">{{ $message }}</span>
+                                                            </div>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for="program_studi">Program Studi</label>
-                                                    <select name="program_studi" id="program_studi"
-                                                        class="form-control @error('program_studi') is-invalid @enderror">
-                                                        <option >Pilih Program Studi</option>
-                                                    </select>
-                                                    
-                                                    @error('program_studi')
-                                                        <div class="invalid_feedback">
-                                                            <span class="text-danger" style="font-size: small">{{ $message }}</span>
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
+
                                     </div>
                                     <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
                                         <div class="ml-4 my-4">
@@ -457,22 +465,21 @@
         <script src="{{ asset('assets') }}/js/mahasiswa/pendaftaran.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-            $(document).ready(function () {
-            // Saat select pertama berubah, filter data menu berdasarkan fakultas jurusan yang dipilih
-            $("#fakultas_jurusan").change(function () {
-                var fakultas_jurusan_id = $(this).val();
-                $("#program_studi").empty();
-                @foreach($programStudi as $item)
-                    if ({{ $item->fakultas_jurusan_id }} == fakultas_jurusan_id) {
-                        $("#program_studi").append(
-                            $("<option></option>")
+            $(document).ready(function() {
+                // Saat select pertama berubah, filter data menu berdasarkan fakultas jurusan yang dipilih
+                $("#fakultas_jurusan").change(function() {
+                    var fakultas_jurusan_id = $(this).val();
+                    $("#program_studi").empty();
+                    @foreach ($programStudi as $item)
+                        if ({{ $item->fakultas_jurusan_id }} == fakultas_jurusan_id) {
+                            $("#program_studi").append(
+                                $("<option></option>")
                                 .attr("value", "{{ $item->id }}")
                                 .text("{{ $item->nama_program_studi }}")
-                        );
-                    }
-                    
-                @endforeach
+                            );
+                        }
+                    @endforeach
+                });
             });
-        });
         </script>
     @endsection
