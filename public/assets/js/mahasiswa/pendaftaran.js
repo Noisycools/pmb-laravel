@@ -59,4 +59,19 @@ $(document).ready(function () {
             $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
         }
     });
+
+    $("#fakultas_jurusan").select2();
+
+    $("#program_studi").select2();
+
+
 });
+function toggleOptionVisibility() {
+        var selectElement = document.getElementById("fakultas_jurusan");
+        var optionElement = document.getElementById("option1");
+
+        if (selectElement.value != "nilai1") {
+          optionElement.setAttribute("hidden", "hidden");
+          optionElement.setAttribute("disabled", "disabled");
+        }
+      }

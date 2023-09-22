@@ -9,6 +9,7 @@ class ProgramStudi extends Model
 {
     use HasFactory;
 
+    protected $table = 'program_studi';
     protected $guarded = ['id'];
 
     public function fakultasJurusan()
