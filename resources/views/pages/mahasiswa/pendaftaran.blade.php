@@ -236,7 +236,8 @@
                                                         style="width: 100%">
                                                         <option @if (old('jenis_kelamin') == 'Laki-laki') {{ 'selected' }} @endif
                                                             value="Laki-laki">Laki-laki</option>
-                                                        <option @if (old('jenis_kelamin') == 'Perempuan') {{ 'selected' }} @endif
+                                                        <option
+                                                            @if (old('jenis_kelamin') == 'Perempuan') {{ 'selected' }} @endif
                                                             value="Perempuan">Perempuan</option>
                                                     </select>
                                                     @error('jenis_kelamin')
@@ -365,19 +366,27 @@
                                         Step content
                                     </div>
                                     <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
-                                        <div class="row my-4">
-                                            <div class="col-12">
-                                                <div class="custom-control custom-control-alternative custom-checkbox">
-                                                    <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                                                    <label class="custom-control-label" for="customCheckRegister">
-                                                        <span class="text-muted">{{ __('Saya setuju dengan ketentuan dan kebijakan yang tertera') }}</span>
-                                                    </label>
+                                        <div class="ml-4 my-4">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h3 class="text-danger">
+                                                        {{ __('Pastikan anda sudah mengisi form dengan tepat dan tidak ada kesalahan!') }}
+                                                    </h3>
+                                                    <div class="custom-control custom-control-alternative custom-checkbox">
+                                                        <input class="custom-control-input" id="customCheckRegister"
+                                                            type="checkbox">
+                                                        <label class="custom-control-label" for="customCheckRegister">
+                                                            <span
+                                                                class="text-muted">{{ __('Saya setuju dengan ketentuan dan kebijakan yang tertera') }}</span>
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="d-flex justify-content-start mt-4">
+                                                <button type="submit" disabled id="btn-create"
+                                                    class="btn btn-success">Submit Data</button>
+                                            </div>
                                         </div>
-                                        <div class="d-flex justify-content-start mt-4">
-                                            <button type="submit" disabled id="btn-create" class="btn btn-success">Submit Data</button>
-                                        </div>                                
                                     </div>
                                 </div>
                             </form>
@@ -394,17 +403,17 @@
         </div>
     @endsection
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#customCheckRegister").change(function () {
-            if ($(this).is(":checked")) {
-                $("#btn-create").prop("disabled", false);
-            } else {
-                $("#btn-create").prop("disabled", true);
-            }
+    <script>
+        $(document).ready(function() {
+            $("#customCheckRegister").change(function() {
+                if ($(this).is(":checked")) {
+                    $("#btn-create").prop("disabled", false);
+                } else {
+                    $("#btn-create").prop("disabled", true);
+                }
+            });
         });
-    });
-</script>
+    </script>
 
     @section('additionalJs')
         <script src="{{ asset('assets') }}/js/mahasiswa/pendaftaran.js"></script>
