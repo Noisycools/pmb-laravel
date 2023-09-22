@@ -19,44 +19,44 @@ $(document).ready(function () {
     $("#file_ijazah").bind("change", function () {
         var filename = $("#file_ijazah").val();
         if (/^\s*$/.test(filename)) {
-            $(".file-upload").removeClass("active");
-            $("#noFile").text("No file chosen...");
+            $(".ijazah").removeClass("active");
+            $("#noFile-ijazah").text("No file chosen...");
         } else {
-            $(".file-upload").addClass("active");
-            $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+            $(".ijazah").addClass("active");
+            $("#noFile-ijazah").text(filename.replace("C:\\fakepath\\", ""));
         }
     });
 
     $("#file_kk").bind("change", function () {
         var filename = $("#file_kk").val();
         if (/^\s*$/.test(filename)) {
-            $(".file-upload").removeClass("active");
-            $("#noFile").text("No file chosen...");
+            $(".kk").removeClass("active");
+            $("#noFile-kk").text("No file chosen...");
         } else {
-            $(".file-upload").addClass("active");
-            $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+            $(".kk").addClass("active");
+            $("#noFile-kk").text(filename.replace("C:\\fakepath\\", ""));
         }
     });
 
     $("#file_pasfoto").bind("change", function () {
         var filename = $("#file_pasfoto").val();
         if (/^\s*$/.test(filename)) {
-            $(".file-upload").removeClass("active");
-            $("#noFile").text("No file chosen...");
+            $(".pasfoto").removeClass("active");
+            $("#noFile-pasfoto").text("No file chosen...");
         } else {
-            $(".file-upload").addClass("active");
-            $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+            $(".pasfoto").addClass("active");
+            $("#noFile-pasfoto").text(filename.replace("C:\\fakepath\\", ""));
         }
     });
 
     $("#file_butawarna").bind("change", function () {
         var filename = $("#file_butawarna").val();
         if (/^\s*$/.test(filename)) {
-            $(".file-upload").removeClass("active");
-            $("#noFile").text("No file chosen...");
+            $(".butawarna").removeClass("active");
+            $("#noFile-butawarna").text("No file chosen...");
         } else {
-            $(".file-upload").addClass("active");
-            $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+            $(".butawarna").addClass("active");
+            $("#noFile-butawarna").text(filename.replace("C:\\fakepath\\", ""));
         }
     });
 });

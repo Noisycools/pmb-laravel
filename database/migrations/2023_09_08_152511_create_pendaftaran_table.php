@@ -18,7 +18,6 @@ class CreatePendaftaranTable extends Migration
             $table->unsignedBigInteger('mahasiswa_id');
             $table->date('tanggal_pendaftaran');
             $table->enum('status', ['Diterima', 'Ditolak', 'Proses']);
-            $table->text('data_pendaftaran'); // Kolom ini bisa berisi berkas pendaftaran atau data lainnya
             $table->text('keterangan')->nullable(); // Kolom ini opsional
             $table->timestamps();
         });
