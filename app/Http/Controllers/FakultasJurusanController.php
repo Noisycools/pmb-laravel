@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\FakultasJurusanDataTable;
 use App\Models\FakultasJurusan;
 use Illuminate\Http\Request;
+use App\Models\Role;
 
 class FakultasJurusanController extends Controller
 {
@@ -16,7 +17,7 @@ class FakultasJurusanController extends Controller
     public function index(FakultasJurusanDataTable $dataTable)
     {
         $data = [
-            'title' => 'Manajemen Pengguna',
+            'title' => 'Manajemen Fakultas Jurusan',
         ];
 
         return $dataTable->render('pages.stafPenerimaan.manajemenFakultasJurusan', $data);
@@ -29,7 +30,14 @@ class FakultasJurusanController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title'    => 'Manajemen Fakultas Jurusan',
+            'subTitle' => 'Tambah Jurusan Fakultas',
+            'route'    => 'fakultasJurusan.index',
+            'roles'    => Role::all(),
+        ];
+
+        return view('pages.stafPenerimaan.createFakultasJurusan', $data);
     }
 
     /**
@@ -40,7 +48,13 @@ class FakultasJurusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_fakultas_jurusan'      => 'required|unique:fakultas_jurusan',
+        ]);
+
+        FakultasJurusan::create($validatedData);
+
+        return redirect()->route('fakultasJurusan.index')->with('success', 'Data Fakultas Baru Berhasil Dibuat!');
     }
 
     /**
@@ -62,7 +76,15 @@ class FakultasJurusanController extends Controller
      */
     public function edit(FakultasJurusan $fakultasJurusan)
     {
-        //
+        $data = [
+            'title'    => 'Manajemen Fakultas Jurusan',
+            'subTitle' => 'Edit Fakultas Jurusan',
+            'route'    => 'fakultasJurusan.index',
+            'roles'    => Role::all(),
+            'fakultasJurusan' => $fakultasJurusan,
+        ];
+
+        return view('pages.stafPenerimaan.editFakultasJurusan', $data);
     }
 
     /**
@@ -74,7 +96,12 @@ class FakultasJurusanController extends Controller
      */
     public function update(Request $request, FakultasJurusan $fakultasJurusan)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_fakultas_jurusan' => 'required',
+        ]);
+
+        FakultasJurusan::where('id', $fakultasJurusan->id)->update($validatedData);
+        return redirect()->route('fakultasJurusan.index')->with('success', 'Data Fakultas Jurusan Berhasil Diedit!');
     }
 
     /**
@@ -85,6 +112,7 @@ class FakultasJurusanController extends Controller
      */
     public function destroy(FakultasJurusan $fakultasJurusan)
     {
-        //
+        FakultasJurusan::destroy($fakultasJurusan->id);
+        return redirect()->route('fakultasJurusan.index')->with('success', 'Data Fakultas Jurusan Berhasil Dihapus!');
     }
 }

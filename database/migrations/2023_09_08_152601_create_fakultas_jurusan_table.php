@@ -16,7 +16,7 @@ class CreateFakultasJurusanTable extends Migration
         Schema::create('fakultas_jurusan', function (Blueprint $table) {
             $table->id();
             $table->string('nama_fakultas_jurusan');
-            $table->text('deskripsi');
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
     }
