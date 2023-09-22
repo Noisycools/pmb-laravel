@@ -29,6 +29,9 @@ Route::controller(LoginController::class)->group(function () {
 		Route::get('login', 'index')->name('login');
 		Route::post('login', 'login')->name('login.auth');
 		Route::get('register', 'register')->name('register.auth');
+		Route::post('registerAction', 'registerAction')->name('registerAction');
+	
+	
 	});
 	Route::get('logout', 'logout')->name('logout.auth');
 });
@@ -55,6 +58,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('pendaftaran', 'App\Http\Controllers\PendaftaranController', ['except' => ['formPendaftaranMahasiswa']]);
 	Route::controller(PendaftaranController::class)->group(function () {
 		Route::get('formPendaftaranMahasiswa', 'formPendaftaranMahasiswa')->name('formPendaftaranMahasiswa');
+		Route::get('registerPembayaran', 'registerPembayaran')->name('registerPembayaran');
+		
 	});
 
 	// Staf Penerimaan

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -45,4 +48,25 @@ class LoginController extends Controller
     {
         return view('auth.register');
     }
+
+    public function registerAction(Request $request)
+    {
+      $data= $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'no_telp' => ['required', 'string', 'min:11','unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'no_telp' => $data['no_telp'],
+            'password' => Hash::make($data['password']),
+        ]);
+        Auth::login($user); 
+        return redirect()->route('registerPembayaran');
+    }
+    
+   
 }

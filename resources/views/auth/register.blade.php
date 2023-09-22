@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="card-body px-lg-5 py-lg-5">
-                        <form role="form" method="POST" action="{{ route('register.auth') }}">
+                        <form role="form" method="POST" action="{{ route('registerAction') }}">
                             @csrf
 
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">

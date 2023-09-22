@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
+use Illuminate\Support\Facades\DB;
+
 class HomeController extends Controller
 {
     /**
@@ -21,9 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $mahasiswa = Mahasiswa::where('email', auth()->user()->email)->first();
+        $pendaftaran = null;
+        if ($mahasiswa != null) {
+            $pendaftaran = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->count();
+        }
         $data = [
-            'title' => 'Dashboard',
-        ];
+                'title' => 'Dashboard',
+                'pendaftaran' => $pendaftaran,
+            ];
+        
         return view('dashboard', $data);
     }
 }

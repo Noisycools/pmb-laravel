@@ -59,22 +59,13 @@
 </head>
 
 <body class="{{ $class ?? '' }}">
-    @auth()
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-        @include('layouts.navbars.sidebar')
-    @endauth
+   
 
     <div class="main-content">
-        @include('layouts.navbars.navbar')
-        @yield('content')
+        @yield('contentregister')
     </div>
-    @yield('contentregister')
-    @guest()
-    
-        @include('layouts.footers.guest')
-    @endguest
+  
+   
 
     <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

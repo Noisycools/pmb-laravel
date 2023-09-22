@@ -46,7 +46,6 @@ class PendaftaranController extends Controller
         $dataToValidate = [
             'name'              => 'required',
             'alamat'            => 'required',
-            'telepon'           => 'required',
             'jenis_kelamin'     => 'required',
             'tanggal_lahir'     => 'required|date',
             'file_ijazah'       => 'required|file|max:2000|mimes:pdf',
@@ -57,6 +56,9 @@ class PendaftaranController extends Controller
 
         if ($request->email != auth()->user()->email)
             $dataToValidate['email'] = 'required|unique:users|unique:mahasiswa';
+
+        if ($request->no_telp != auth()->user()->no_telp)
+            $dataToValidate['no_telp'] = 'required|unique:users|unique:mahasiswa';
 
         $validatedData = $request->validate($dataToValidate);
     }
@@ -104,5 +106,14 @@ class PendaftaranController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function registerPembayaran()
+    {
+        
+        $data = [
+            'title' => 'Register Pembayaran,'
+        ];
+        return view('pages.mahasiswa.registerpembayaran',$data);
     }
 }

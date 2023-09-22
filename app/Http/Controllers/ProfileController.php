@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Mahasiswa;
 
 class ProfileController extends Controller
 {
@@ -15,7 +16,15 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('profile.edit');
+        $mahasiswa = Mahasiswa::where('email', auth()->user()->email)->first();
+        $pendaftaran = null;
+        if ($mahasiswa != null) {
+            $pendaftaran = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->count();
+        }
+        $data = [
+            'pendaftaran' => $pendaftaran,
+        ];
+        return view('profile.edit', $data);
     }
 
     /**

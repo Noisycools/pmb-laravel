@@ -85,16 +85,24 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
+                     @if (!auth()->user()->role(1) )
                     <a class="nav-link" href="{{ route('home') }}">
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
                     </a>
+                     @endif
                 </li>
                 @calon_mahasiswa
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('formPendaftaranMahasiswa') }}">
-                            <i class="ni ni-laptop text-primary"></i> {{ __('Pendaftaran Online') }}
-                        </a>
-                    </li>
+                @if ($pendaftaran != null)
+                    
+                @else
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('formPendaftaranMahasiswa') }}">
+                        <i class="ni ni-laptop text-primary"></i> {{ __('Pendaftaran Online') }}
+                    </a>
+                </li>
+                @endif
+                
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('home') }}">
                             <i class="ni ni-badge text-primary"></i> {{ __('Cek Status Pendaftaran') }}
