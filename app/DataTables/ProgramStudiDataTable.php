@@ -21,7 +21,7 @@ class ProgramStudiDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('nama_fakultas_jurusan', function(ProgramStudi $programStudi){
+            ->addColumn('nama_fakultas_jurusan', function (ProgramStudi $programStudi) {
                 return $programStudi->fakultasJurusan->nama_fakultas_jurusan;
             })
             ->addColumn('action', function (ProgramStudi $programStudi) {
@@ -49,18 +49,18 @@ class ProgramStudiDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('programstudi-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(0, 'asc')
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+            ->setTableId('programstudi-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(0, 'asc')
+            ->buttons(
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            );
     }
 
     /**
@@ -75,8 +75,6 @@ class ProgramStudiDataTable extends DataTable
             Column::make('nama_program_studi'),
             Column::make('deskripsi'),
             Column::make('nama_fakultas_jurusan'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

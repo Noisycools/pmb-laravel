@@ -50,7 +50,6 @@ class ProgramStudiController extends Controller
     {
         $validatedData = $request->validate([
             'nama_program_studi'      => 'required|unique:program_studi',
-            'deskripsi'     => 'required',
             'fakultas_jurusan_id' => 'required',
         ]);
 
@@ -100,11 +99,10 @@ class ProgramStudiController extends Controller
     {
         $validatedData = $request->validate([
             'nama_program_studi' => 'required',
-            'deskripsi' => 'required',
             'fakultas_jurusan_id' => 'required',
         ]);
 
-        ProgramStudi::where('id',$programStudi->id)->update($validatedData);
+        ProgramStudi::where('id', $programStudi->id)->update($validatedData);
         return redirect()->route('programStudi.index')->with('success', 'Data Program Studi Berhasil Diedit!');
     }
 

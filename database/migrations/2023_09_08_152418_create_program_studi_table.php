@@ -16,7 +16,7 @@ class CreateProgramStudiTable extends Migration
         Schema::create('program_studi', function (Blueprint $table) {
             $table->id();
             $table->string('nama_program_studi');
-            $table->text('deskripsi');
+            $table->text('deskripsi')->nullable();
             $table->unsignedBigInteger('fakultas_jurusan_id');
             $table->timestamps();
         });

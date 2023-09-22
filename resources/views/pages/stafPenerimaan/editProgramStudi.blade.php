@@ -12,16 +12,19 @@
                         <h3 class="mb-0">{{ __('Edit Data Program Studi Baru') }}</h3>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('programStudi.update', $programStudi->id) }}" id="formEditPengguna">
+                        <form method="POST" action="{{ route('programStudi.update', $programStudi->id) }}"
+                            id="formEditPengguna">
                             @method('put')
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="nama_program_studi">Nama Program Studi</label>
+                                        <label class="form-control-label" for="nama_program_studi">Nama Program
+                                            Studi</label>
                                         <input type="text" name="nama_program_studi"
-                                            class="form-control @error('nama_program_studi') is-invalid @enderror" id="nama_program_studi"
-                                            placeholder="Masukkan Nama Program Studi" required value="{{ old('nama_program_studi', $programStudi->nama_program_studi) }}">
+                                            class="form-control @error('nama_program_studi') is-invalid @enderror"
+                                            id="nama_program_studi" placeholder="Masukkan Nama Program Studi" required
+                                            value="{{ old('nama_program_studi', $programStudi->nama_program_studi) }}">
                                         @error('nama_program_studi')
                                             <div class="invalid_feedback">
                                                 <span class="text-danger" style="font-size: small">{{ $message }}</span>
@@ -32,7 +35,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="deskripsi">Deskripsi</label>
-                                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" placeholder="Masukkan Deskripsi" required name="deskripsi" id="deskripsi" cols="30" rows="10" >{{ old('deskripsi', $programStudi->deskripsi) }}</textarea>
+                                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" placeholder="Masukkan Deskripsi"
+                                            name="deskripsi" id="deskripsi" cols="30" rows="10">{{ old('deskripsi', $programStudi->deskripsi) }}</textarea>
                                         @error('deskripsi')
                                             <div class="invalid_feedback">
                                                 <span class="text-danger" style="font-size: small">{{ $message }}</span>

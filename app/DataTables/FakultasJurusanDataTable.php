@@ -71,8 +71,6 @@ class FakultasJurusanDataTable extends DataTable
             Column::make('id'),
             Column::make('nama_fakultas_jurusan'),
             Column::make('deskripsi'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
