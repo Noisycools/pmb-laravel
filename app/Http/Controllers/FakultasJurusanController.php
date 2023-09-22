@@ -50,7 +50,6 @@ class FakultasJurusanController extends Controller
     {
         $validatedData = $request->validate([
             'nama_fakultas_jurusan'      => 'required|unique:fakultas_jurusan',
-            'deskripsi'     => 'required',
         ]);
 
         FakultasJurusan::create($validatedData);
@@ -99,10 +98,9 @@ class FakultasJurusanController extends Controller
     {
         $validatedData = $request->validate([
             'nama_fakultas_jurusan' => 'required',
-            'deskripsi' => 'required',
         ]);
 
-        FakultasJurusan::where('id',$fakultasJurusan->id)->update($validatedData);
+        FakultasJurusan::where('id', $fakultasJurusan->id)->update($validatedData);
         return redirect()->route('fakultasJurusan.index')->with('success', 'Data Fakultas Jurusan Berhasil Diedit!');
     }
 

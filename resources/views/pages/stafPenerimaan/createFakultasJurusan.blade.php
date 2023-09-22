@@ -17,10 +17,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="nama_fakultas_jurusan">Nama Fakultas Jurusan</label>
+                                        <label class="form-control-label" for="nama_fakultas_jurusan">Nama Fakultas
+                                            Jurusan</label>
                                         <input type="text" name="nama_fakultas_jurusan"
-                                            class="form-control @error('nama_fakultas_jurusan') is-invalid @enderror" id="nama_fakultas_jurusan"
-                                            placeholder="Masukkan Nama Fakultas Jurusan" required >
+                                            class="form-control @error('nama_fakultas_jurusan') is-invalid @enderror"
+                                            id="nama_fakultas_jurusan" placeholder="Masukkan Nama Fakultas Jurusan"
+                                            required>
                                         @error('nama_fakultas_jurusan')
                                             <div class="invalid_feedback">
                                                 <span class="text-danger" style="font-size: small">{{ $message }}</span>
@@ -31,7 +33,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="deskripsi">Deskripsi</label>
-                                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" placeholder="Masukkan Deskripsi" required name="deskripsi" id="deskripsi" cols="30" rows="10"></textarea>
+                                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" placeholder="Masukkan Deskripsi"
+                                            name="deskripsi" id="deskripsi" cols="30" rows="10"></textarea>
                                         @error('deskripsi')
                                             <div class="invalid_feedback">
                                                 <span class="text-danger" style="font-size: small">{{ $message }}</span>
