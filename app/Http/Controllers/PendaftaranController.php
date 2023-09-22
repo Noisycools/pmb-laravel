@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PendaftaranController extends Controller
 {
@@ -18,8 +19,10 @@ class PendaftaranController extends Controller
 
     public function formPendaftaranMahasiswa()
     {
+        $email = auth()->user()->email;
         $data = [
             'title' => 'Form Pendaftaran Mahasiswa',
+            'cekDaftar' => DB::table('mahasiswa')->where('email',$email)->count(),
         ];
 
         return view('pages.mahasiswa.pendaftaran', $data);
