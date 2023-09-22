@@ -403,7 +403,8 @@
                                                                 for="fakultas_jurusan">Fakultas
                                                                 Jurusan</label>
                                                             <select name="fakultas_jurusan" id="fakultas_jurusan"
-                                                                class="form-control @error('fakultas_jurusan') is-invalid @enderror">
+                                                                class="form-control @error('fakultas_jurusan') is-invalid @enderror"
+                                                                style="width: 100%" onchange="toggleOptionVisibility()">
                                                                 <option hidden>Pilih Fakultas</option>
                                                                 @foreach ($fakultasJurusan as $item)
                                                                     <option
@@ -428,7 +429,8 @@
                                                             <label class="form-control-label" for="program_studi">Program
                                                                 Studi</label>
                                                             <select name="program_studi_id" id="program_studi"
-                                                                class="form-control @error('program_studi') is-invalid @enderror">
+                                                                class="form-control @error('program_studi') is-invalid @enderror"
+                                                                style="width: 100%">
                                                                 <option>Pilih Program Studi</option>
                                                             </select>
 
