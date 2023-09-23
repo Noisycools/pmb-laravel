@@ -24,11 +24,18 @@ class PendaftaranController extends Controller
     public function formPendaftaranMahasiswa()
     {
         $email = auth()->user()->email;
+        $pendaftaran = null;
+        $mahasiswa = Mahasiswa::where('email',auth()->user()->email)->first();
+        if ($mahasiswa != null) {
+            $pendaftaran = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->count();
+        }
         $data = [
             'title' => 'Form Pendaftaran Mahasiswa',
             'fakultasJurusan' => FakultasJurusan::all(),
             'programStudi' => ProgramStudi::all(),
             'cekDaftar' => DB::table('mahasiswa')->where('email', $email)->count(),
+            'pendaftaran' => $pendaftaran,
+            'mahasiswa'=> $mahasiswa,
         ];
 
         return view('pages.mahasiswa.pendaftaran', $data);
