@@ -92,7 +92,7 @@
                 </li>
                 @endif   
                 @calon_mahasiswa
-                @if ($mahasiswa == false)
+                @if ( $mahasiswa == null || $bayar == false)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('formPendaftaranMahasiswa') }}">
                             <i class="ni ni-laptop text-primary"></i> {{ __('Pendaftaran Online') }}

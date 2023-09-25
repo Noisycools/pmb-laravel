@@ -14,7 +14,7 @@
                             <div class="form-group{{ $errors->has('no_telp') ? ' has-danger' : '' }} mb-3">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                        <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
                                     </div>
                                     <input class="form-control{{ $errors->has('no_telp') ? ' is-invalid' : '' }}"
                                         placeholder="{{ __('Nomor Telpon') }}" type="text" name="no_telp"

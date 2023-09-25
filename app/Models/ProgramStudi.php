@@ -16,4 +16,9 @@ class ProgramStudi extends Model
     {
         return $this->belongsTo(FakultasJurusan::class, 'fakultas_jurusan_id');
     }
+
+    public function mahasiswa()
+    {
+        return $this->hasMany(Mahasiswa::class);
+    }
 }

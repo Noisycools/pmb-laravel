@@ -8,6 +8,7 @@ use App\Models\Mahasiswa;
 use App\Models\Pendaftaran;
 use App\Models\ProgramStudi;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Else_;
 
 class PendaftaranController extends Controller
 {
@@ -26,8 +27,17 @@ class PendaftaranController extends Controller
         $email = auth()->user()->email;
         $pendaftaran = null;
         $mahasiswa = Mahasiswa::where('email',auth()->user()->email)->first();
+        $bayar = false;
+        
         if ($mahasiswa != null) {
             $pendaftaran = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->count();
+            $bayar = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->get('status_pembayaran')->first();
+            if ($bayar->status_pembayaran == 'Dibayar') {
+                $bayar = true;
+                return redirect('home');
+            }else {
+                $bayar = false;
+            }
         }
         $data = [
             'title' => 'Form Pendaftaran Mahasiswa',
@@ -36,6 +46,7 @@ class PendaftaranController extends Controller
             'cekDaftar' => DB::table('mahasiswa')->where('email', $email)->count(),
             'pendaftaran' => $pendaftaran,
             'mahasiswa'=> $mahasiswa,
+            'bayar' => $bayar,
         ];
 
         return view('pages.mahasiswa.pendaftaran', $data);
