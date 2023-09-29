@@ -24,15 +24,20 @@ class HomeController extends Controller
      * @return \Illuminate\View\View
      */
     public function index()
-    {   
+    {
         $pendaftaran = null;
         $mahasiswa = Mahasiswa::where('email',auth()->user()->email)->first();
-        $bayar = 'Belum Dibayar';
+        $bayar = false;
         if ($mahasiswa != null) {
             $pendaftaran = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->where('status_pembayaran','Dibayar')->count();
             $bayar = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->get('status_pembayaran')->first();
+            if ($bayar->status_pembayaran == 'Dibayar') {
+                $bayar = true;
+            } else {
+                $bayar = false;
+            }
         }
-        
+
         $data = [
             'title' => 'Dashboard',
             'pendaftaran' => $pendaftaran,
