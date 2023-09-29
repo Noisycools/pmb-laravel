@@ -15,7 +15,16 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('profile.edit');
+        $mahasiswa = Mahasiswa::where('email', auth()->user()->email)->first();
+        $pendaftaran = null;
+        if ($mahasiswa != null) {
+            $pendaftaran = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->count();
+        }
+        $data = [
+            'pendaftaran' => $pendaftaran,
+            'mahasiswa'=> $mahasiswa,
+        ];
+        return view('profile.edit',$data);
     }
 
     /**

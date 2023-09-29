@@ -55,8 +55,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('pendaftaran', 'App\Http\Controllers\PendaftaranController', ['except' => ['formPendaftaranMahasiswa']]);
 	Route::controller(PendaftaranController::class)->group(function () {
 		Route::get('formPendaftaranMahasiswa', 'formPendaftaranMahasiswa')->name('formPendaftaranMahasiswa');
-	});
+		Route::post('formPendaftaranMahasiswa', 'bayar')->name('bayar');
 
+	});
 	// Staf Penerimaan
 	Route::resource('fakultasJurusan', 'App\Http\Controllers\FakultasJurusanController', ['except' => ['show']]);
 

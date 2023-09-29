@@ -17,6 +17,7 @@ class CreatePendaftaranTable extends Migration
             $table->id();
             $table->unsignedBigInteger('mahasiswa_id');
             $table->date('tanggal_pendaftaran');
+            $table->enum('status_pembayaran', ['Dibayar', 'Belum Dibayar',])->default('Belum Dibayar');
             $table->enum('status', ['Diterima', 'Ditolak', 'Proses']);
             $table->text('keterangan')->nullable(); // Kolom ini opsional
             $table->timestamps();
