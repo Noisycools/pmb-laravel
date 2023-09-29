@@ -117,6 +117,27 @@ class PendaftaranController extends Controller
         return redirect()->route('formPendaftaranMahasiswa')->with('success', 'Anda telah melakukan pendaftaran! Silahkan lakukan proses pembayaran pada halaman berikut.');
     }
 
+    public function Bayar(){
+        
+        // data statik sementara ketika button di click mengarah ke  home atau dasboard
+        
+        $mahasiswa = Mahasiswa::where('email',auth()->user()->email)->first('id');
+        if($mahasiswa != null){
+            $pendaftaran = Pendaftaran::where('mahasiswa_id', $mahasiswa->id)->get();
+
+          
+            foreach ($pendaftaran as $p) {
+                $p->update(['status_pembayaran' => 'Dibayar']);
+            }
+
+            return redirect('/home');
+        }
+        
+
+
+
+    }
+
     /**
      * Display the specified resource.
      *
