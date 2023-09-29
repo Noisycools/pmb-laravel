@@ -122,6 +122,20 @@
             margin-top: .3rem;
             margin-left: -1.25rem;
         }
+
+        .img-bayar {
+            height: 50px;
+            width: 100px;
+        }
+
+        .bayar {
+            cursor: pointer;
+
+        }
+
+        .accordion-body {
+            text-align: left;
+        }
     </style>
 @endsection
 
@@ -144,27 +158,86 @@
                     @endif
 
                     <div class="card-body">
-
                         @if ($cekDaftar != 0)
-                            tes
-                            <form method="POST" action="#" id="formPembayaran">
+                            <form method="POST" action="{{ route('bayar') }}" id="formPembayaran">
                                 @csrf
                                 <div class="tab-content">
-
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="customRadio1">
-                                        <label class="custom-control-label" for="customRadio1">BNI</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="customRadio2">
-                                        <label class="custom-control-label" for="customRadio2">BRI</label>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="d-flex justify-content-start mt-4">
-                                            <button type="submit" id="btn-create" class="btn btn-success">Bayar</button>
+                                    <div class="container" style="text-align: center;">
+                                        <div class="col-md-3 mx-auto mb-3 border-bottom">
+                                            <h3>ATM</h3>
+                                        </div>
+                                        <img src="https://logos-download.com/wp-content/uploads/2017/03/BCA_logo_Bank_Central_Asia.png"
+                                            id="img-bca" class="img-bayar bayar collapsed" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        <h4 class="bayar collapsed mb-3" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            BCA</h4>
+                                        <div id="collapseOne" class="accordion-collapse collapse"
+                                            aria-labelledby="headingOne" data-bs-parent="#accordionRental" style="">
+                                            <div class="accordion-body text-sm opacity-8">
+                                                We’re not always in the position that we want to be at.
+                                                We’re
+                                                constantly growing. We’re constantly making mistakes. We’re
+                                                constantly trying to express ourselves and actualize our
+                                                dreams.
+                                                If
+                                                you have the opportunity to play this game
+                                                of life you need to appreciate every moment. A lot of people
+                                                don’t
+                                                appreciate the moment until it’s passed.
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-4">
+                                                <button type="submit" class="btn btn-success">Bayar</button>
+                                            </div>
+                                        </div>
+                                        <img src="https://logos-download.com/wp-content/uploads/2016/06/Bank_BRI_logo_Bank_Rakyat_Indonesia.png"
+                                            id="img-bri" class="img-bayar bayar collapsed" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <h4 class="bayar collapsed mb-3" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            BRI</h4>
+                                        <div id="collapseTwo" class="accordion-collapse collapse"
+                                            aria-labelledby="headingTwo" data-bs-parent="#accordionRental" style="">
+                                            <div class="accordion-body text-sm opacity-8">
+                                                We’re not always in the position that we want to be at.
+                                                We’re
+                                                constantly growing. We’re constantly making mistakes. We’re
+                                                constantly trying to express ourselves and actualize our
+                                                dreams.
+                                                If
+                                                you have the opportunity to play this game
+                                                of life you need to appreciate every moment. A lot of people
+                                                don’t
+                                                appreciate the moment until it’s passed.
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-4">
+                                                <button type="submit" class="btn btn-success">Bayar</button>
+                                            </div>
+                                        </div>
+                                        <img src="https://logos-download.com/wp-content/uploads/2016/06/Bank_Mandiri_logo_fon.png"
+                                            id="img-mandiri" class="img-bayar bayar collapsed" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseThree" aria-expanded="false"
+                                            aria-controls="collapseThree">
+                                        <h4 class="bayar collapsed mb-3" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseThree" aria-expanded="false"
+                                            aria-controls="collapseThree">Mandiri</h4>
+                                        <div id="collapseThree" class="accordion-collapse collapse"
+                                            aria-labelledby="headingOne" data-bs-parent="#accordionRental" style="">
+                                            <div class="accordion-body text-sm opacity-8">
+                                                We’re not always in the position that we want to be at.
+                                                We’re
+                                                constantly growing. We’re constantly making mistakes. We’re
+                                                constantly trying to express ourselves and actualize our
+                                                dreams.
+                                                If
+                                                you have the opportunity to play this game
+                                                of life you need to appreciate every moment. A lot of people
+                                                don’t
+                                                appreciate the moment until it’s passed.
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-4">
+                                                <button type="submit" class="btn btn-success">Bayar</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
