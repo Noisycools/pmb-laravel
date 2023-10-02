@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\UserController;
@@ -50,6 +51,10 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.tables');
 	})->name('table');
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+
+    Route::controller(HomeController::class)->group(function(){
+        Route::get('statusPendaftaran', 'statusPendaftaran')->name('statusPendaftaran');
+    });
 
 	// Calon Mahasiswa
 	Route::resource('pendaftaran', 'App\Http\Controllers\PendaftaranController', ['except' => ['formPendaftaranMahasiswa']]);

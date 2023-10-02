@@ -46,4 +46,31 @@ class HomeController extends Controller
         ];
         return view('dashboard', $data);
     }
+
+    public function statusPendaftaran()
+    {
+        $pendaftaran = null;
+        $mahasiswa = Mahasiswa::where('email',auth()->user()->email)->first();
+        $bayar = false;
+        if ($mahasiswa != null) {
+            $pendaftaran = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->where('status_pembayaran','Dibayar')->count();
+            $bayar = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->get('status_pembayaran')->first();
+            if ($bayar->status_pembayaran == 'Dibayar') {
+                $bayar = true;
+                $status = 'Sudah Dibayar!';
+            } else {
+                $bayar = false;
+                $status = 'Belum Dibayar!';
+            }
+        }
+
+        $data = [
+            'title' => 'Cek Status Pembayaran',
+            'pendaftaran' => $pendaftaran,
+            'mahasiswa'=> $mahasiswa,
+            'bayar' => $bayar,
+            'status' => $status,
+        ];
+        return view('pages.mahasiswa.cekStatusPendaftaran',$data);
+    }
 }

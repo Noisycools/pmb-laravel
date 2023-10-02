@@ -100,7 +100,7 @@
                         </li>
                     @endif
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">
+                        <a class="nav-link" href="{{ route('statusPendaftaran') }}">
                             <i class="ni ni-badge text-primary"></i> {{ __('Cek Status Pendaftaran') }}
                         </a>
                     </li>

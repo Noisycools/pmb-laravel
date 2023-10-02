@@ -28,13 +28,13 @@ class PendaftaranController extends Controller
         $pendaftaran = null;
         $mahasiswa = Mahasiswa::where('email',auth()->user()->email)->first();
         $bayar = false;
-        
+
         if ($mahasiswa != null) {
             $pendaftaran = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->count();
             $bayar = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->get('status_pembayaran')->first();
             if ($bayar->status_pembayaran == 'Dibayar') {
                 $bayar = true;
-                return redirect('home');
+                return redirect('statusPendaftaran');
             }else {
                 $bayar = false;
             }
@@ -118,21 +118,21 @@ class PendaftaranController extends Controller
     }
 
     public function Bayar(){
-        
+
         // data statik sementara ketika button di click mengarah ke  home atau dasboard
-        
+
         $mahasiswa = Mahasiswa::where('email',auth()->user()->email)->first('id');
         if($mahasiswa != null){
             $pendaftaran = Pendaftaran::where('mahasiswa_id', $mahasiswa->id)->get();
 
-          
+
             foreach ($pendaftaran as $p) {
                 $p->update(['status_pembayaran' => 'Dibayar']);
             }
 
-            return redirect('/home');
+            return redirect('statusPendaftaran');
         }
-        
+
 
 
 
