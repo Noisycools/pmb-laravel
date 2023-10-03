@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PendaftaranDataTable;
 use Illuminate\Http\Request;
 use App\Models\FakultasJurusan;
 use App\Models\Mahasiswa;
@@ -123,14 +124,10 @@ class PendaftaranController extends Controller
 
         $mahasiswa = Mahasiswa::where('email',auth()->user()->email)->first('id');
         if($mahasiswa != null){
-            $pendaftaran = Pendaftaran::where('mahasiswa_id', $mahasiswa->id)->get();
+            $pendaftaran = Pendaftaran::where('mahasiswa_id', $mahasiswa->id)->first();
+            $pendaftaran->update(['status_pembayaran' => 'Dibayar']);
 
-
-            foreach ($pendaftaran as $p) {
-                $p->update(['status_pembayaran' => 'Dibayar']);
-            }
-
-            return redirect('statusPendaftaran');
+            return redirect()->route('statusPendaftaran')->with('success','true');
         }
 
 

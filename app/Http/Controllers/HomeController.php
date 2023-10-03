@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Pendaftaran;
+use App\DataTables\PendaftaranDataTable;
 
 class HomeController extends Controller
 {
@@ -29,8 +31,8 @@ class HomeController extends Controller
         $mahasiswa = Mahasiswa::where('email',auth()->user()->email)->first();
         $bayar = false;
         if ($mahasiswa != null) {
-            $pendaftaran = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->where('status_pembayaran','Dibayar')->count();
-            $bayar = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->get('status_pembayaran')->first();
+            $pendaftaran = Pendaftaran::where('mahasiswa_id',$mahasiswa->id)->where('status_pembayaran','Dibayar')->count();
+            $bayar = Pendaftaran::where('mahasiswa_id',$mahasiswa->id)->get('status_pembayaran')->first();
             if ($bayar->status_pembayaran == 'Dibayar') {
                 $bayar = true;
             } else {
@@ -47,23 +49,23 @@ class HomeController extends Controller
         return view('dashboard', $data);
     }
 
-    public function statusPendaftaran()
+    public function statusPendaftaran(PendaftaranDataTable $datatables)
     {
         $pendaftaran = null;
         $mahasiswa = Mahasiswa::where('email',auth()->user()->email)->first();
         $bayar = false;
+        $status = null;
         if ($mahasiswa != null) {
             $pendaftaran = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->where('status_pembayaran','Dibayar')->count();
             $bayar = DB::table('pendaftaran')->where('mahasiswa_id',$mahasiswa->id)->get('status_pembayaran')->first();
             if ($bayar->status_pembayaran == 'Dibayar') {
                 $bayar = true;
-                $status = 'Sudah Dibayar!';
+                $status = null;
             } else {
                 $bayar = false;
-                $status = 'Belum Dibayar!';
+                $status = false;
             }
         }
-
         $data = [
             'title' => 'Cek Status Pembayaran',
             'pendaftaran' => $pendaftaran,
@@ -71,6 +73,6 @@ class HomeController extends Controller
             'bayar' => $bayar,
             'status' => $status,
         ];
-        return view('pages.mahasiswa.cekStatusPendaftaran',$data);
+        return $datatables->render('pages.mahasiswa.cekStatusPendaftaran',$data);
     }
 }

@@ -21,6 +21,8 @@ class UserController extends Controller
     {
         $data = [
             'title' => 'Manajemen Pengguna',
+            'pendaftaran' => null,
+            'bayar' => null,
         ];
 
         return $dataTable->render('pages.admin.manajemenPengguna', $data);
@@ -38,6 +40,8 @@ class UserController extends Controller
             'subTitle' => 'Tambah Pengguna',
             'route'    => 'user.index',
             'roles'    => Role::all(),
+            'pendaftaran' => null,
+            'bayar' => null,
         ];
 
         return view('pages.admin.createPengguna', $data);
@@ -95,7 +99,9 @@ class UserController extends Controller
             'subTitle' => 'Edit Pengguna',
             'route'    => 'user.index',
             'roles'    => Role::all(),
-            'user'     => $user
+            'user'     => $user,
+            'pendaftaran' => null,
+            'bayar' => null,
         ];
 
         return view('pages.admin.editPengguna', $data);
